@@ -213,7 +213,6 @@ function myChoice (category) {
     <div className="App">
       <Header categories={categories} myChoice={myChoice}/>
       <Products products={products.filter((p)=>( (p.category === choice) || (choice === "All categories")))}/>
-      {choice}
     </div>
   );
   }
