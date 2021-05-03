@@ -1,19 +1,44 @@
 import './Header.css';
+import Slider from '@material-ui/core/Slider';
+import { useState } from 'react';
+
+
 
 function Header({myChoice, categories}){
 
+  function valuetext(value) {
+    return `${value}°C`;
+  }
+
+
+    const [value, setValue] = useState([20, 37]);
+  
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
+
 
     return(
-        <nav className="product-filter">
-        <h1>Odelya's style shop</h1>  
-        <div className="sort">
-          <div className="collection-sort">
-            <label>Filter by:</label>
-            <select onChange= {(e)=> myChoice(e.target.value)}>
-            <option value="All categories"> All categories </option>
-            {categories.map((categories) =><option>{categories}</option>)}
-           </select>
-          </div>
+      <nav className="product-filter">
+      <h1>ZARA</h1>  
+      <div className="root">
+      <Slider 
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        aria-labelledby="range-slider"
+        getAriaValueText={valuetext}
+      />
+      </div>
+
+      <div className="sort">
+        <div className="collection-sort">
+          <label>Filter by:</label>
+          <select onChange= {(e)=> myChoice(e.target.value)}>
+          <option value="All categories"> All categories </option>
+          {categories.map((categories) =><option>{categories}</option>)}
+         </select>
+        </div>
 
 
          
@@ -33,6 +58,7 @@ function Header({myChoice, categories}){
 
           </div>
         </div>
+      
       </nav>
     );
 }
