@@ -1,8 +1,8 @@
 import Header from "./Header";
 import Products from "./Products";
 import "./App.css";
-import {  useEffect, useState } from "react";
-import ThemeContext from './context/ThemeContext'
+import { /*useContext,*/ useEffect, useState } from "react";
+import ThemeContext from "./ThemeContext";
 import Cart from "./Cart";
 
 /*const products = [
@@ -195,6 +195,7 @@ import Cart from "./Cart";
 ];*/
 
 function App() {
+  
   const [choice, setChoice] = useState("All categories");
   const [products, setProducts] = useState([]);
   const groupBy = (xs, key) =>
@@ -210,46 +211,92 @@ function App() {
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((response) => response.json())
-      .then((data) => setProducts(data));
+      .then(data=> setProducts(data),)
   }, []);
 
+ /*const [cartProducts, setCartProducts] = useState(products);*/
   const [cart, setCart] = useState([]);
-  const [totalItem, setTotalItem]=useState(0)
-  const [totalPrice, setTotalPrice]=useState(0)
+  const [totalItem, setTotalItem] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  /*const [quantity, setQuantity] = useState(0)*/
 
   function addToCart(title) {
-
-    const arrProduct = products.filter((p) => p.title === title);
-    const myProduct = {
-    id: cart.length + 1,
-    title:arrProduct[0].title ,
-    price:arrProduct[0].price,
-    image:arrProduct[0].image,
-    description:arrProduct[0].description,
-    category:arrProduct[0].category,
-    //completed: false,
+    const myProduct = products.find((p) => p.title === title);
+    if(cart.find((p) => p.title === myProduct.title))
+    {
+      setCart(cart.map(p => (p.title === myProduct.title)?{...p,quantity:(++p.quantity)}:p));
     }
-    setCart([...cart, myProduct])
-    setTotalItem(cart.length+1)
-    setTotalPrice(totalPrice + myProduct.price)
-    console.log(cart)
+    else
+    {
+      setCart([...cart, {...myProduct, quantity: 1}])
+    }
+    setTotalItem(totalItem + 1);
+    setTotalPrice(totalPrice + myProduct.price);
   }
 
-    
+  function removeFromCart(title) {
+    const myProduct = cart.find((p) => p.title === title);
+    if(myProduct.quantity > 1)
+    {
+      setCart(cart.map(p => (p.title === myProduct.title)?{...p,quantity:(--p.quantity)}:p));
+    }
+    else
+    {
+      --myProduct.quantity;
+      setCart(cart.filter(p => (p.title !== myProduct.title)));
+    }
+    setTotalItem(totalItem - 1);
+    setTotalPrice(totalPrice - myProduct.price);
+  }
+
+  function deleteItem(title){
+    const myProduct = cart.find((p) => p.title === title);
+    setTotalItem(totalItem - myProduct.quantity);
+    setTotalPrice(totalPrice - (myProduct.price*myProduct.quantity));
+    myProduct.quantity = 0;
+    setCart(cart.filter(p => (p.title !== myProduct.title)));
+  }
+
+  function quantityP(title){
+    let myProduct = cart.find(p => p.title === title );
+    if(myProduct)
+    { 
+      return myProduct.quantity;
+    }
+    else
+    {
+      return 0;
+    }
+  }
+  function removeAll()
+  {setCart([])
+  setTotalItem(0)
+  setTotalPrice(0)}
 
   return (
-    <ThemeContext.Provider value={{addToCart,totalItem,totalPrice,cart }}>
+    <ThemeContext.Provider
+      value={{
+        addToCart,
+        totalItem,
+        totalPrice,
+        cart,
+        removeFromCart,
+        quantityP,
+        setCart,
+        deleteItem,
+        removeAll
+      }}
+    >
       <div className="App">
         <Header categories={categories} myChoice={myChoice} />
         <div className="shopping-cart">
-         <Cart/>
+          <Cart />
         </div>
         <Products
           products={products.filter(
             (p) => p.category === choice || choice === "All categories"
           )}
         />
-  
       </div>
     </ThemeContext.Provider>
   );

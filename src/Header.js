@@ -1,36 +1,14 @@
 import './Header.css';
-import Slider from '@material-ui/core/Slider';
-import { useState } from 'react';
 
 
 
 function Header({myChoice, categories}){
 
-  function valuetext(value) {
-    return `${value}°C`;
-  }
-
-
-    const [value, setValue] = useState([20, 37]);
-  
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
 
 
     return(
       <nav className="product-filter">
-      <h1>ZARA</h1>  
-      <div className="root">
-      <Slider 
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        aria-labelledby="range-slider"
-        getAriaValueText={valuetext}
-      />
-      </div>
-
+      <h1>ZARA</h1>
       <div className="sort">
         <div className="collection-sort">
           <label>Filter by:</label>
