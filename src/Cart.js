@@ -3,6 +3,7 @@ import ThemeContext from "./ThemeContext";
 import {
   useContext /*, forwardRef, useState, Ref, ReactElement*/,
 } from "react";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>;
 
@@ -42,7 +43,7 @@ function Cart() {
             className="buttonTrashCart"
             onClick={() => deleteItem(item.title)}
           >
-            Remove from cart
+            <DeleteIcon />
           </button>
         </li>
       ))}
