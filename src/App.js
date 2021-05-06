@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Products from "./Products";
 import "./App.css";
-import { /*useContext,*/ useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ThemeContext from "./ThemeContext";
 import Cart from "./Cart";
 
@@ -195,7 +195,6 @@ import Cart from "./Cart";
 ];*/
 
 function App() {
-  
   const [choice, setChoice] = useState("All categories");
   const [products, setProducts] = useState([]);
   const groupBy = (xs, key) =>
@@ -204,6 +203,7 @@ function App() {
       return rv;
     }, {});
   const categories = Object.keys(groupBy(products, "category"));
+
   function myChoice(category) {
     setChoice(category);
   }
@@ -211,24 +211,23 @@ function App() {
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((response) => response.json())
-      .then(data=> setProducts(data),)
+      .then((data) => setProducts(data));
   }, []);
 
- /*const [cartProducts, setCartProducts] = useState(products);*/
   const [cart, setCart] = useState([]);
   const [totalItem, setTotalItem] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-  /*const [quantity, setQuantity] = useState(0)*/
 
   function addToCart(title) {
     const myProduct = products.find((p) => p.title === title);
-    if(cart.find((p) => p.title === myProduct.title))
-    {
-      setCart(cart.map(p => (p.title === myProduct.title)?{...p,quantity:(++p.quantity)}:p));
-    }
-    else
-    {
-      setCart([...cart, {...myProduct, quantity: 1}])
+    if (cart.find((p) => p.title === myProduct.title)) {
+      setCart(
+        cart.map((p) =>
+          p.title === myProduct.title ? { ...p, quantity: ++p.quantity } : p
+        )
+      );
+    } else {
+      setCart([...cart, { ...myProduct, quantity: 1 }]);
     }
     setTotalItem(totalItem + 1);
     setTotalPrice(totalPrice + myProduct.price);
@@ -236,42 +235,55 @@ function App() {
 
   function removeFromCart(title) {
     const myProduct = cart.find((p) => p.title === title);
-    if(myProduct.quantity > 1)
-    {
-      setCart(cart.map(p => (p.title === myProduct.title)?{...p,quantity:(--p.quantity)}:p));
-    }
-    else
-    {
+    if (myProduct.quantity > 1) {
+      setCart(
+        cart.map((p) =>
+          p.title === myProduct.title ? { ...p, quantity: --p.quantity } : p
+        )
+      );
+    } else {
       --myProduct.quantity;
-      setCart(cart.filter(p => (p.title !== myProduct.title)));
+      setCart(cart.filter((p) => p.title !== myProduct.title));
     }
     setTotalItem(totalItem - 1);
     setTotalPrice(totalPrice - myProduct.price);
   }
 
-  function deleteItem(title){
+  function deleteItem(title) {
     const myProduct = cart.find((p) => p.title === title);
     setTotalItem(totalItem - myProduct.quantity);
-    setTotalPrice(totalPrice - (myProduct.price*myProduct.quantity));
+    setTotalPrice(totalPrice - myProduct.price * myProduct.quantity);
     myProduct.quantity = 0;
-    setCart(cart.filter(p => (p.title !== myProduct.title)));
+    setCart(cart.filter((p) => p.title !== myProduct.title));
   }
 
-  function quantityP(title){
-    let myProduct = cart.find(p => p.title === title );
-    if(myProduct)
-    { 
+  function quantityP(title) {
+    let myProduct = cart.find((p) => p.title === title);
+    if (myProduct) {
       return myProduct.quantity;
-    }
-    else
-    {
+    } else {
       return 0;
     }
   }
-  function removeAll()
-  {setCart([])
-  setTotalItem(0)
-  setTotalPrice(0)}
+
+  function removeAll() {
+    setCart([]);
+    setTotalItem(0);
+    setTotalPrice(0);
+  }
+
+  function choiceCategory(choice) {
+    const productOfCategory = products.filter(
+      (p) => p.category === choice || choice === "All categories"
+    );
+    return productOfCategory;
+  }
+
+  const productCategory = choiceCategory(choice);
+  const priceCategory = productCategory.map((p) => p.price);
+  const minPrice = Math.min(...priceCategory);
+  const maxPrice = Math.max(...priceCategory);
+  const [value, setValue] = useState([minPrice, maxPrice]);
 
   return (
     <ThemeContext.Provider
@@ -284,7 +296,11 @@ function App() {
         quantityP,
         setCart,
         deleteItem,
-        removeAll
+        removeAll,
+        minPrice,
+        maxPrice,
+        value,
+        setValue,
       }}
     >
       <div className="App">
@@ -293,8 +309,8 @@ function App() {
           <Cart />
         </div>
         <Products
-          products={products.filter(
-            (p) => p.category === choice || choice === "All categories"
+          products={productCategory.filter(
+            (p) => p.price >= value[0] && p.price <= value[1]
           )}
         />
       </div>
