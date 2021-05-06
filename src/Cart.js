@@ -4,6 +4,8 @@ import {
   useContext /*, forwardRef, useState, Ref, ReactElement*/,
 } from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import PaymentIcon from "@material-ui/icons/Payment";
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>;
 
@@ -54,11 +56,12 @@ function Cart() {
     <div className="cart">
       <span className="mycart">
         <br />
-        My Cart
+        My
+        <ShoppingCartIcon fontSize="default" color="inherit" />
       </span>
       {cartItem}
       <div className="total">
-        <span>Total Amount:</span>
+        <span>Total Price:</span>
         <span>{Math.abs(totalPrice.toFixed(2))}$</span>
       </div>
       <div className="total">
@@ -68,8 +71,12 @@ function Cart() {
       <div className="actions">
         <button className="button--alt" onClick={() => removeAll()}>
           Remove All
+          <DeleteIcon />
         </button>
-        <button className="button">Order</button>
+        <button className="button">
+          Payment
+          <PaymentIcon />
+        </button>
       </div>
     </div>
   );

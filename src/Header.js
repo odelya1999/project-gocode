@@ -2,6 +2,8 @@ import "./Header.css";
 import Slider from "@material-ui/core/Slider";
 import { useContext } from "react";
 import ThemeContext from "./ThemeContext";
+import GradeTwoToneIcon from "@material-ui/icons/GradeTwoTone";
+import FlareTwoToneIcon from "@material-ui/icons/FlareTwoTone";
 
 function Header({ myChoice, categories }) {
   const { maxPrice, minPrice } = useContext(ThemeContext);
@@ -13,10 +15,23 @@ function Header({ myChoice, categories }) {
 
   return (
     <nav className="product-filter">
-      <h1>~~Odelya's style~~</h1>
+      <h1>
+        <FlareTwoToneIcon color="secondary" />
+        <GradeTwoToneIcon />
+        <FlareTwoToneIcon color="secondary" />
+        <GradeTwoToneIcon />
+        <FlareTwoToneIcon color="secondary" />
+        Odelya's style
+        <FlareTwoToneIcon color="secondary" />
+        <GradeTwoToneIcon />
+        <FlareTwoToneIcon color="secondary" />
+        <GradeTwoToneIcon />
+        <FlareTwoToneIcon color="secondary" />
+      </h1>
       <div className="root">
         product's price range
         <Slider
+          color="inherit"
           max={maxPrice}
           min={minPrice}
           value={value}
@@ -29,8 +44,9 @@ function Header({ myChoice, categories }) {
       <div className="sort">
         <div className="collection-sort">
           <label>Filter by:</label>
+
           <select onChange={(e) => myChoice(e.target.value)}>
-            <option value="All categories"> All categories </option>
+            <option value="All categories">All categories </option>
             {categories.map((categories) => (
               <option>{categories}</option>
             ))}
