@@ -5,10 +5,7 @@ import { useState, useEffect } from "react";
 function ProductDetails() {
   const { id } = useParams();
   const [infData, setInfData] = useState([]);
-<<<<<<< HEAD
 
-=======
->>>>>>> ea38ba3b3d3fa27e22be5125088a8fa6f4a95dbf
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
       .then((response) => response.json())
