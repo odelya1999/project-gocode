@@ -2,8 +2,9 @@ import "./Header.css";
 import Slider from "@material-ui/core/Slider";
 import { useContext } from "react";
 import ThemeContext from "./ThemeContext";
-import GradeTwoToneIcon from "@material-ui/icons/GradeTwoTone";
 import FlareTwoToneIcon from "@material-ui/icons/FlareTwoTone";
+import FilterVintageOutlinedIcon from "@material-ui/icons/FilterVintageOutlined";
+import PhoneInTalkRoundedIcon from "@material-ui/icons/PhoneInTalkRounded";
 
 function Header({ myChoice, categories }) {
   const { maxPrice, minPrice } = useContext(ThemeContext);
@@ -17,19 +18,25 @@ function Header({ myChoice, categories }) {
     <nav className="product-filter">
       <h1>
         <FlareTwoToneIcon color="secondary" />
-        <GradeTwoToneIcon />
+        <FilterVintageOutlinedIcon />
         <FlareTwoToneIcon color="secondary" />
-        <GradeTwoToneIcon />
+        <FilterVintageOutlinedIcon />
         <FlareTwoToneIcon color="secondary" />
         Odelya's style
         <FlareTwoToneIcon color="secondary" />
-        <GradeTwoToneIcon />
+        <FilterVintageOutlinedIcon />
         <FlareTwoToneIcon color="secondary" />
-        <GradeTwoToneIcon />
+        <FilterVintageOutlinedIcon />
         <FlareTwoToneIcon color="secondary" />
       </h1>
+      <h3>
+        <br />
+        <br />
+        <PhoneInTalkRoundedIcon />
+        053-7134187
+      </h3>
       <div className="root">
-        product's price range
+        ~ product's range price ~
         <Slider
           color="inherit"
           max={maxPrice}

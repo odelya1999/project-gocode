@@ -1,9 +1,12 @@
-import Header from "./Header";
+/*import Header from "./Header";
 import Products from "./Products";
+import Cart from "./Cart";*/
 import "./App.css";
 import { useEffect, useState } from "react";
 import ThemeContext from "./ThemeContext";
-import Cart from "./Cart";
+import { Link, Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import Home from "./views/Home";
+import ProductDetails from "./views/ProductDetails";
 
 /*const products = [
   {
@@ -284,6 +287,7 @@ function App() {
   const minPrice = Math.min(...priceCategory);
   const maxPrice = Math.max(...priceCategory);
   const [value, setValue] = useState([minPrice, maxPrice]);
+  const [isShown, setIsShown] = useState(false);
 
   return (
     <ThemeContext.Provider
@@ -301,18 +305,38 @@ function App() {
         maxPrice,
         value,
         setValue,
+        categories,
+        myChoice,
+        productCategory,
+        isShown,
+        products,
       }}
     >
-      <div className="App">
-        <Header categories={categories} myChoice={myChoice} />
-        <div className="shopping-cart">
-          <Cart />
-        </div>
-        <Products
-          products={productCategory.filter(
-            (p) => p.price >= value[0] && p.price <= value[1]
-          )}
-        />
+      <nav>
+        <ul>
+          <li>
+            <Link to="/" onClick={() => setIsShown(!isShown)}>
+              <div className="App">
+                <br />
+                <br />
+                <br />
+                {!isShown ? "HOME" : ""}
+              </div>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      <div>
+        <Router>
+          <Switch>
+            <Route path="/products/:id">
+              <ProductDetails />
+            </Route>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
       </div>
     </ThemeContext.Provider>
   );

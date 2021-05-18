@@ -1,16 +1,11 @@
 import Product from "./Product";
 import "./Products.css";
-import Spinner from "./Spinner"
-
+import Spinner from "./Spinner";
 
 function Products({ products }) {
-
-
-    return (
+  return (
     <section className="products">
-
-
-      {!products.length && <Spinner/>}
+      {!products.length && <Spinner />}
       {products.map(({ id, image, description, title, price, category }) => (
         <Product
           key={id}
@@ -21,10 +16,7 @@ function Products({ products }) {
           category={category}
         />
       ))}
-    
     </section>
-
-    
   );
 }
 

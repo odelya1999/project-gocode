@@ -6,6 +6,12 @@ import {
 import DeleteIcon from "@material-ui/icons/Delete";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PaymentIcon from "@material-ui/icons/Payment";
+import IconButton from "@material-ui/core/IconButton";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import Badge from "@material-ui/core/Badge";
+import { withStyles } from "@material-ui/core/styles";
+import FilterVintageOutlinedIcon from "@material-ui/icons/FilterVintageOutlined";
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>;
 
@@ -32,50 +38,65 @@ function Cart() {
           {item.quantity}
           <br />
           <br />
-          <button
-            className="buttonCart1"
+          <IconButton
+            fontSize="default"
+            color="inherit"
             onClick={() => removeFromCart(item.title)}
           >
-            -
-          </button>
-          <button className="buttonCart2" onClick={() => addToCart(item.title)}>
-            +
-          </button>
-          <button
-            className="buttonTrashCart"
-            onClick={() => deleteItem(item.title)}
+            <RemoveIcon />
+          </IconButton>{" "}
+          <IconButton
+            color="inherit"
+            fontSize="default"
+            onClick={() => addToCart(item.title)}
           >
-            <DeleteIcon />
-          </button>
+            <AddIcon />
+          </IconButton>
+          <IconButton color="secondary" className="buttonTrashCart">
+            <DeleteIcon onClick={() => deleteItem(item.title)} />
+          </IconButton>
         </li>
       ))}
     </ol>
   );
+  const StyledBadge = withStyles((theme) => ({
+    badge: {
+      right: -3,
+      top: 13,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  }))(Badge);
 
   return (
     <div className="cart">
       <span className="mycart">
         <br />
-        My
-        <ShoppingCartIcon fontSize="default" color="inherit" />
+        <FilterVintageOutlinedIcon />
+        <FilterVintageOutlinedIcon />
+        <FilterVintageOutlinedIcon />
+        {"  My "}
+        <IconButton aria-label="cart">
+          <StyledBadge badgeContent={totalItem} color="secondary">
+            <ShoppingCartIcon fontSize="large" color="inherit" />{" "}
+          </StyledBadge>
+        </IconButton>
+        <FilterVintageOutlinedIcon />
+        <FilterVintageOutlinedIcon />
+        <FilterVintageOutlinedIcon />
       </span>
       {cartItem}
       <div className="total">
         <span>Total Price:</span>
         <span>{Math.abs(totalPrice.toFixed(2))}$</span>
       </div>
-      <div className="total">
-        <span>Total Items:</span>
-        <span>{totalItem}</span>
-      </div>
+
       <div className="actions">
         <button className="button--alt" onClick={() => removeAll()}>
-          Remove All
-          <DeleteIcon />
+          Delete Cart <DeleteIcon />
         </button>
         <button className="button">
-          Payment
-          <PaymentIcon />
+          Payment <PaymentIcon />
         </button>
       </div>
     </div>

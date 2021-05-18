@@ -10,7 +10,7 @@
   font-size: 26px;
   font-weight: 100;
   padding: auto;
-  -webkit-box-shadow: 1px 1px 20px 0 #000000;
+  /*-webkit-box-shadow: 1px 1px 20px 0 #000000;*/
   -moz-box-shadow: 1px 1px 20px 0 #000000;
   box-shadow: 1px 1px 20px 0 #000000;
   text-shadow: 1px 1px 20px #000000;
@@ -19,8 +19,8 @@
   cursor: pointer;
   text-align: center;
   margin-right: 20px;
-  margin-bottom: 15px;
   position: relative;
+  margin-bottom: 15px;
 }
 .buttonTrashCart {
   float: right;
@@ -39,7 +39,7 @@
   font-size: 26px;
   font-weight: 100;
   padding: auto;
-  -webkit-box-shadow: 1px 1px 20px 0 #000000;
+  /*-webkit-box-shadow: 1px 1px 20px 0 #000000;*/
   -moz-box-shadow: 1px 1px 20px 0 #000000;
   box-shadow: 1px 1px 20px 0 #000000;
   text-shadow: 1px 1px 20px #000000;
@@ -80,7 +80,7 @@
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
+  background: #b3004b;
 }
 
 .cart {
@@ -94,6 +94,8 @@
   font-weight: bold;
   padding: 20px;
   margin: 10px;
+  text-align: center;
+  align-content: center;
 }
 
 .cart-items img {
