@@ -92,7 +92,7 @@
 }
 .mycart {
   font-weight: bold;
-  padding: 20px;
+  padding: 7px AUTO;
   margin: 10px;
   text-align: center;
   align-content: center;

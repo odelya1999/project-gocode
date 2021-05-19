@@ -1,6 +1,11 @@
-.root {
+.slider {
   width: 300px;
   margin-right: 50px;
+  text-align: center;
+}
+.telephone {
+  float: left;
+  padding-left: 5px;
 }
 .product-filter {
   display: flex;

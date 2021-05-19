@@ -29,13 +29,15 @@ function Header({ myChoice, categories }) {
         <FilterVintageOutlinedIcon />
         <FlareTwoToneIcon color="secondary" />
       </h1>
-      <h3>
-        <br />
-        <br />
-        <PhoneInTalkRoundedIcon />
-        053-7134187
-      </h3>
-      <div className="root">
+      <span className="telephone">
+        <h3>
+          <br />
+          <br />
+          <PhoneInTalkRoundedIcon />
+          053-7134187
+        </h3>
+      </span>
+      <div className="slider">
         ~ product's range price ~
         <Slider
           color="inherit"

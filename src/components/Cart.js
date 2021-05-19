@@ -71,7 +71,7 @@ function Cart() {
 
   return (
     <div className="cart">
-      <span className="mycart">
+      <div className="mycart">
         <br />
         <FilterVintageOutlinedIcon />
         <FilterVintageOutlinedIcon />
@@ -85,7 +85,7 @@ function Cart() {
         <FilterVintageOutlinedIcon />
         <FilterVintageOutlinedIcon />
         <FilterVintageOutlinedIcon />
-      </span>
+      </div>
       {cartItem}
       <div className="total">
         <span>Total Price:</span>
