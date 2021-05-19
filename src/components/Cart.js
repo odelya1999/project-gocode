@@ -1,5 +1,5 @@
 import "./Cart.css";
-import ThemeContext from "./ThemeContext";
+import ThemeContext from "../ThemeContext";
 import {
   useContext /*, forwardRef, useState, Ref, ReactElement*/,
 } from "react";
@@ -12,6 +12,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import Badge from "@material-ui/core/Badge";
 import { withStyles } from "@material-ui/core/styles";
 import FilterVintageOutlinedIcon from "@material-ui/icons/FilterVintageOutlined";
+import RemoveShoppingCartRoundedIcon from "@material-ui/icons/RemoveShoppingCartRounded";
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>;
 
@@ -93,7 +94,7 @@ function Cart() {
 
       <div className="actions">
         <button className="button--alt" onClick={() => removeAll()}>
-          Delete Cart <DeleteIcon />
+          Delete Cart <RemoveShoppingCartRoundedIcon />
         </button>
         <button className="button">
           Payment <PaymentIcon />

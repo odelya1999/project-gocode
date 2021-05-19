@@ -1,7 +1,7 @@
 import "./Header.css";
 import Slider from "@material-ui/core/Slider";
 import { useContext } from "react";
-import ThemeContext from "./ThemeContext";
+import ThemeContext from "../ThemeContext";
 import FlareTwoToneIcon from "@material-ui/icons/FlareTwoTone";
 import FilterVintageOutlinedIcon from "@material-ui/icons/FilterVintageOutlined";
 import PhoneInTalkRoundedIcon from "@material-ui/icons/PhoneInTalkRounded";

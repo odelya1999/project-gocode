@@ -1,13 +1,12 @@
 import { useContext } from "react";
-import Header from "../Header";
-import Products from "../Products";
-import Cart from "../Cart";
+import Header from "../components/Header";
+import Products from "../components/Products";
+import Cart from "../components/Cart";
 import ThemeContext from "../ThemeContext";
 
 function Home() {
-  const { categories, myChoice, productCategory, value } = useContext(
-    ThemeContext
-  );
+  const { categories, myChoice, productCategory, value } =
+    useContext(ThemeContext);
   const { isShown } = useContext(ThemeContext);
   return (
     <div className="myHome">

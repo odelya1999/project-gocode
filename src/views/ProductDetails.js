@@ -1,6 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import HighlightOffRoundedIcon from "@material-ui/icons/HighlightOffRounded";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -15,6 +17,9 @@ function ProductDetails() {
   }, [id]);
   return (
     <div>
+      <Link to="/">
+        <HighlightOffRoundedIcon />
+      </Link>
       <h1>{infData.title}</h1>
       <img src={infData.image} alt={infData.title} width="300" />
       <p>Price: ${infData.price}</p>
