@@ -18,7 +18,8 @@ function Home() {
           </div>
           <Products
             products={productCategory.filter(
-              (p) => p.price >= value[0] && p.price <= value[1]
+              (p) =>
+                p.price >= Math.min(...value) && p.price <= Math.max(...value)
             )}
           />
         </div>
